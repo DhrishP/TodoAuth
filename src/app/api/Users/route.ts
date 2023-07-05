@@ -1,18 +1,22 @@
-import { NextResponse } from "next/server"
-import prisma from "../../../../prisma/client"
+import { NextRequest, NextResponse } from "next/server";
+import prisma from "../../../../prisma/client";
+import {hashPass} from "../../../../lib/passhash";
 
-
-// export async function GET(req:Request){
-
-// }
-
-export async function POST(req:Request){
-    try{
-    const {username,email,password} = await req.json()
-    const data = await prisma.user.create({data:{email:email,username:username,password:password}})
-    if(!data) throw new Error("cant input the data")
-    return NextResponse.json(data)
-    }catch(err){
-        console.log(err)
-    }
+export async function POST(req: NextRequest) {
+  try {
+    const { username, email, password } = await req.json();
+    const hashedpass = await hashPass(password);
+    const isPresent = await prisma.user.findUnique({
+      where:{
+        email : email
+      }
+    })
+    if(isPresent) alert("email already exist");
+    const data = await prisma.user.create({
+      data: { email: email, name: username, password: hashedpass },
+    });
+    return NextResponse.json(data);
+  } catch (err) {
+    console.log(err);
+  }
 }
