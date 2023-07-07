@@ -14,10 +14,11 @@ type Todos = {
 };
 
 const TodoCard = ({ email }: TodoProps) => {
+  const Siteurl = process.env.NEXT_URL || 'http://localhost:3000';
   const [Todo, Settodo] = useState<Todos[]>([]);
   const inputref = useRef<HTMLInputElement>(null);
   const FetchTodos = async () => {
-    const fetchtodo = await fetch("http://localhost:3000/api/checktodos", {
+    const fetchtodo = await fetch(`${Siteurl}/api/checktodos`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ email }),
@@ -31,7 +32,7 @@ const TodoCard = ({ email }: TodoProps) => {
   const Handleadd = async (e: React.FormEvent) => {
     const task = inputref.current?.value;
     if (task?.length === 0) alert("please write something before adding");
-    const res = await fetch("http://localhost:3000/api/addtodo", {
+    const res = await fetch(`${Siteurl}/api/addtodo`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ email, task }),
@@ -40,6 +41,7 @@ const TodoCard = ({ email }: TodoProps) => {
     console.log("sucess");
   };
   useEffect(() => {
+  
     FetchTodos();
   }, []);
   return (
@@ -66,7 +68,7 @@ const TodoCard = ({ email }: TodoProps) => {
           {Todo ? (
             Todo.map((todo) => (
               <>
-                <div className="todo hover:bg-gray-800 cursor-pointer bg-black shadow-md rounded-md p-4 mb-4 flex items-center justify-between w-1/2">
+                <div key={todo.id} className="todo hover:bg-gray-800 cursor-pointer bg-black shadow-md rounded-md p-4 mb-4 flex items-center justify-between w-1/2">
                   <p className="text-lg text-white">{todo.task}</p>
                   <div className="icons flex gap-2">
                     <div className="icon cursor-pointer text-gray-500 text-xl">

@@ -6,7 +6,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "../../../../../prisma/client";
 import type { Adapter } from "next-auth/adapters";
 
-
+const Siteurl = process.env.NEXT_URL || 'http://localhost:3000';
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
@@ -38,7 +38,7 @@ export const options: NextAuthOptions = {
         },
       },
       async authorize(credentials) {
-        const res = await fetch("http://localhost:3000/api/checkusers", {
+        const res = await fetch(`${Siteurl}/api/checkusers`, {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" },
