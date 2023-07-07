@@ -59,7 +59,6 @@ model VerificationToken {
 
 model todo {
   id        String  @id @default(cuid())
-  title     String
   task      String
   completed Boolean @default(false)
   User      User?   @relation(fields: [userId], references: [id])

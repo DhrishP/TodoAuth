@@ -6,6 +6,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "../../../../../prisma/client";
 import type { Adapter } from "next-auth/adapters";
 
+
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
@@ -53,8 +54,14 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
+  
   session: {
     // Set to jwt in order to CredentialsProvider works properly
     strategy: 'jwt'
-  }
+  },
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      return baseUrl
+    },
+  },
 };

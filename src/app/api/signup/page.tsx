@@ -25,10 +25,11 @@ const SignUpModal = () => {
       },
       body: JSON.stringify({ email, password,username }),
     });
-    if (!res.ok) throw new Error("failed to post data");
-    console.log(res)
+    if (!res.ok) alert("Credentials already exists");
+    else{
+      router.push('/api/auth/signin')
+    }
    
-    router.push('/api/auth/signin')
     
    
   };
