@@ -3,6 +3,7 @@ import prisma from "../../../../prisma/client";
 
 export async function POST(req:NextRequest){
     const {email} = await req.json()
+    console.log(email)
         const data = await prisma.user.findFirst({
             where: {
              email:email,
@@ -12,12 +13,13 @@ export async function POST(req:NextRequest){
             }
            });
            if (data) {
+            console.log(data)
             const res = await prisma.todo.findMany({
                 where:{
                     userId:data.id
                 }
             })
-            console.log(res)
+            
             return NextResponse.json(res)
            }
     

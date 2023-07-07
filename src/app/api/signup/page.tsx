@@ -10,6 +10,7 @@ const SignUpModal = () => {
   const router = useRouter()
  
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const Siteurl = process.env.NEXT_URL || 'http://localhost:3000';
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const username = formData.get("username") || "";
@@ -18,7 +19,7 @@ const SignUpModal = () => {
     if (!(email || password || username )) {
       alert("enter the credentials");
     }
-    const res = await fetch("http://localhost:3000/api/Users", {
+    const res = await fetch(`${Siteurl}/api/Users`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
