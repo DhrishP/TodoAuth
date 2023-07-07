@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../prisma/client";
 import {hashPass} from "../../../../lib/passhash";
+import { error } from "console";
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,7 +12,7 @@ export async function POST(req: NextRequest) {
         email : email
       }
     })
-    if(isPresent) alert("email already exist");
+    if(isPresent) return NextResponse.error()
     const data = await prisma.user.create({
       data: { email: email, name: username, password: hashedpass },
     });
