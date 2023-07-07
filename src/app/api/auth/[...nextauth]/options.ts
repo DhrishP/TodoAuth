@@ -6,7 +6,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "../../../../../prisma/client";
 import type { Adapter } from "next-auth/adapters";
 
-const Siteurl = process.env.NEXT_URL || 'http://localhost:3000';
+const Siteurl = process.env.NEXT_URL 
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [

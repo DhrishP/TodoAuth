@@ -35,7 +35,7 @@ const TodoCard = ({ email }: TodoProps) => {
 
   const handleDelete = async (e:React.FormEvent,id:string,userId:string | null) =>{
 
-    const siteUrl = process.env.NEXT_URL || 'http://localhost:3000'
+    const siteUrl = process.env.NEXT_URL
     const res = await fetch(`${siteUrl}/api/deletetodo`,{
       method:"POST",
       headers:{'Content-type':"application/json"},
