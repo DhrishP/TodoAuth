@@ -6,7 +6,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "../../../../../prisma/client";
 import type { Adapter } from "next-auth/adapters";
 
-const Siteurl = process.env.NEXT_URL 
+const Siteurl = process.env.NEXT_PUBLIC_URL 
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
@@ -61,7 +61,7 @@ export const options: NextAuthOptions = {
   },
   callbacks: {
     async redirect({ url, baseUrl  }) {
-      return url
+      return baseUrl
     },
   },
 };
