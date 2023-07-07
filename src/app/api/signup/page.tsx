@@ -10,7 +10,7 @@ const SignUpModal = () => {
   const router = useRouter()
  
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    const Siteurl = process.env.NEXT_URL || 'http://localhost:3000';
+    const Siteurl = process.env.NEXT_URL;
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const username = formData.get("username") || "";
