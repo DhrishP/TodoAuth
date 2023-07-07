@@ -17,7 +17,7 @@ type Todos = {
 };
 
 const TodoCard = ({ email }: TodoProps) => {
-  const Siteurl = process.env.NEXT_URL || "http://localhost:3000";
+  const Siteurl = process.env.NEXT_PUBLIC_URL;
   const router = useRouter()
   const [Todo, Settodo] = useState<Todos[]>([]);
   const inputref = useRef<HTMLInputElement>(null);
@@ -35,7 +35,7 @@ const TodoCard = ({ email }: TodoProps) => {
 
   const handleDelete = async (e:React.FormEvent,id:string,userId:string | null) =>{
 
-    const siteUrl = process.env.NEXT_URL
+    const siteUrl = process.env.NEXTAUTH_URL;
     const res = await fetch(`${siteUrl}/api/deletetodo`,{
       method:"POST",
       headers:{'Content-type':"application/json"},
