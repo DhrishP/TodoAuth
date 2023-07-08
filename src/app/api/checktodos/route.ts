@@ -17,7 +17,7 @@ export async function POST(req:NextRequest){
                     userId:data.id
                 }
             })
-            console.log(res)
+            
             return NextResponse.json(res)
            }
     

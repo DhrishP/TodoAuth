@@ -3,7 +3,7 @@ import TodoCard from "./components/TodoCard";
 import { useSession } from "next-auth/react";
 export default  function Home() {
   const { data: session, status } = useSession();
-  console.log(status)
+  // console.log(status)
  if (status=== 'authenticated') {
   return  (
   <div>
