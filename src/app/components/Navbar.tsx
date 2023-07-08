@@ -11,7 +11,7 @@ const Navbar =  () => {
           <div className="flex items-center justify-between w-full">
             <div className="">
               <a href="#" className="text-white font-bold text-xl">
-              {data?.user?.email}
+                ToD0
               </a>
             </div>
             <div className=" flex  ">
@@ -32,7 +32,7 @@ const Navbar =  () => {
                 href={"/api/auth/signin"}
                 className="text-gray-300 self-end hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
               >
-              Sign IN
+              Sign In
               </Link>
               </>
                 }
